@@ -16,10 +16,10 @@ class LessonPage extends StatelessWidget {
               horizontalPadding: 20,
               floatingBottomPadding: 28,
               floatingHorizontalPadding: 30,
-              floatingActionButton: model.userMessages(),
+              floatingActionButton: model.floatingActionButton,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: model.widgets,
+                children: model.listOfMessages,
               ),
             ),
     );
