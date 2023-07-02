@@ -42,11 +42,12 @@ class LessonProvider extends BaseBloc {
     notifyListeners();
   }
 
-  void botMessages() {
+  void botMessages() async {
     if (index < messages.length) {
       if (messages[index].source == 'bot') {
         if (messages[index].type == 'quiz') {
           if (isFirstAns) {
+            await Future.delayed(const Duration(seconds: 1));
             listOfMessages.add(MessageTile(
               message: messages[index].text,
               sender: messages[index].source,
@@ -71,6 +72,7 @@ class LessonProvider extends BaseBloc {
                           sender: 'user',
                           isUserMessage: true,
                         ));
+                        notifyListeners();
                         isFalse = false;
                         index++;
                       } else {
@@ -85,6 +87,7 @@ class LessonProvider extends BaseBloc {
           );
         } else {
           floatingActionButton = null;
+          await Future.delayed(const Duration(seconds: 1));
           listOfMessages.add(MessageTile(
             message: messages[index].text,
             sender: messages[index].source,
@@ -111,6 +114,7 @@ class LessonProvider extends BaseBloc {
             isUserMessage: messages[index].source == 'user',
           ));
           index++;
+          notifyListeners();
           botMessages();
         },
       );
